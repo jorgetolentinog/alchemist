@@ -1,3 +1,4 @@
+import sys
 from collections import OrderedDict
 
 from alchemist.db import connection
@@ -39,9 +40,9 @@ def upgrade(db_name: str):
             )
 
         cursor.commit()
-    except Exception as e:
+    except Exception as ex:
         cursor.rollback()
-        raise e
+        raise ex
 
 
 def downgrade(db_name: str):
@@ -60,7 +61,7 @@ def downgrade(db_name: str):
             last_migration = migration
 
         if not last_version:
-            exit("No migrations found for downgrade")
+            sys.exit("No migrations found for downgrade")
 
         script = last_migration["down"]
         step_log(
@@ -73,9 +74,9 @@ def downgrade(db_name: str):
         cursor.execute("DELETE FROM version WHERE version = ?", last_version)
 
         cursor.commit()
-    except Exception as e:
+    except Exception as ex:
         cursor.rollback()
-        raise e
+        raise ex
 
 
 def step_log(version, description, script):

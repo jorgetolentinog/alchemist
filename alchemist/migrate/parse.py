@@ -28,8 +28,8 @@ def parse_migrations(db_name: str) -> OrderedDict:
             description=file_test.group(2), up="", down="", apply=False,
         )
 
-        with open(os.path.join(directory, filename), "r") as f:
-            lines = f.read().split("\n")
+        with open(os.path.join(directory, filename), "r") as file_open:
+            lines = file_open.read().split("\n")
             section_action = None
 
             for line in lines:

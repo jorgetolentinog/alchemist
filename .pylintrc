@@ -1,0 +1,7 @@
+[MASTER]
+extension-pkg-whitelist=
+    pyodbc,
+
+disable=
+    missing-module-docstring,
+    missing-function-docstring,
