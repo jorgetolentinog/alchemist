@@ -1,3 +1,3 @@
-from alchemist import migrate
+from alchemist.db import migrate
 
 migrate.downgrade('default')

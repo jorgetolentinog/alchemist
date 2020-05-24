@@ -1,5 +1,5 @@
-from . import migrate
+from . import db
 
 __all__ = [
-    "migrate",
+    "db",
 ]
