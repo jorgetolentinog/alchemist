@@ -1,3 +1,5 @@
+DATABASE_DEFAULT = "default"
+
 DATABASES = {
     "default": {
         "server": "localhost",

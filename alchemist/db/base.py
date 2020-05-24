@@ -62,11 +62,13 @@ class ConnectWrapper:
         return TransactionWrapper(self._conn)
 
 
-def connection(db_name="default") -> ConnectWrapper:
+def connection(db_name=config.DATABASE_DEFAULT) -> ConnectWrapper:
     """Get or create a connection"""
 
     if not _connections.get(db_name):
-        db_config = config.DATABASES[db_name]
+        db_config = config.DATABASES.get(db_name)
+        if not db_config:
+            raise Exception("No config for %s database" % db_name)
 
         _connections[db_name] = ConnectWrapper(
             driver=db_config.get("driver", "FreeTDS"),
