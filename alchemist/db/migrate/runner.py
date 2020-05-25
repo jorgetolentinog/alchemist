@@ -1,4 +1,3 @@
-import sys
 from collections import OrderedDict
 
 from alchemist.db.base import connection
@@ -59,7 +58,8 @@ def downgrade(db_name: str):
         last_migration = migration
 
     if not last_version:
-        sys.exit("No migrations found for downgrade")
+        print("No migrations found for downgrade")
+        return
 
     script = last_migration["down"]
     log_step(

@@ -1,0 +1,13 @@
+global_var: 'ok'
+databases:
+    default:
+        server: localhost
+        database: demo
+        user: sa
+        password: yourStrong(!)Password
+
+    rrhh:
+        server: localhost
+        database: rrhh
+        user: sa
+        password: yourStrong(!)Password

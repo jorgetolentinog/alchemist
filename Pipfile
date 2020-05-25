@@ -9,6 +9,8 @@ black = "*"
 
 [packages]
 pyodbc = "*"
+pyyaml = "*"
+envyaml = "*"
 
 [requires]
 python_version = "3.8"

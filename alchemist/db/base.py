@@ -5,7 +5,7 @@ from alchemist import config
 _connections = dict()
 
 
-def _row_as_dict(cursor, row):
+def cursor_row_as_dict(cursor, row):
     columns = [col[0] for col in cursor.description]
     return dict(zip(columns, row))
 
@@ -18,10 +18,12 @@ class CursorWrapper:
 
     def fetchone(self):
         row = self._cursor.fetchone()
-        return _row_as_dict(self._cursor, row) if row else None
+        return cursor_row_as_dict(self._cursor, row) if row else None
 
     def fetchall(self):
-        return [_row_as_dict(self._cursor, row) for row in self._cursor.fetchall()]
+        return [
+            cursor_row_as_dict(self._cursor, row) for row in self._cursor.fetchall()
+        ]
 
     def __getattr__(self, name):
         def wrapper(*args, **kwargs):
@@ -62,11 +64,11 @@ class ConnectWrapper:
         return TransactionWrapper(self._conn)
 
 
-def connection(db_name=config.DATABASE_DEFAULT) -> ConnectWrapper:
+def connection(db_name: str) -> ConnectWrapper:
     """Get or create a connection"""
 
     if not _connections.get(db_name):
-        db_config = config.DATABASES.get(db_name)
+        db_config = config.databases.get(db_name)
         if not db_config:
             raise Exception("No config for %s database" % db_name)
 
