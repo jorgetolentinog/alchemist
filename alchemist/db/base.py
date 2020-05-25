@@ -1,6 +1,6 @@
 import pyodbc
 
-from alchemist import config
+from alchemist.base import config
 
 _connections = dict()
 
@@ -68,7 +68,7 @@ def connection(db_name: str) -> ConnectWrapper:
     """Get or create a connection"""
 
     if not _connections.get(db_name):
-        db_config = config.databases.get(db_name)
+        db_config = config.get('databases', {}).get(db_name)
         if not db_config:
             raise Exception("No config for %s database" % db_name)
 
