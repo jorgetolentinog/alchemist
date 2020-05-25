@@ -1,7 +1,7 @@
 import argparse
 import sys
 
-from alchemist.db import migrate
+from alchemist.db.migrate import runner as migrate_runner
 
 
 def migrate_database(argument):
@@ -13,7 +13,7 @@ def migrate_database(argument):
 
         for db_name in bases:
             print(f'db - {db_name}')
-            getattr(migrate, cmd)(db_name=db_name)
+            getattr(migrate_runner, cmd)(db_name=db_name)
 
 
 # parser

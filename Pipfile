@@ -9,7 +9,6 @@ black = "*"
 
 [packages]
 pyodbc = "*"
-pyyaml = "*"
 envyaml = "*"
 
 [requires]
